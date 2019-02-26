@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Postin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <%- include('./partials/header'); -%>
+    <ul>
+    <% for (let post of posts) {%> 
+        <li> 
+            <h2><a href="/post/<%=post.queryName%>"><%= post.title %></a> (<%= post.score %>) <a href="/post/<%=post.queryName%>/up">^</a><a href="/post/<%=post.queryName%>/down">v</a></h2>
+            <p><%= post.text %>  <br> <i>Posted by: <%= post.user %></i></p>
+        </li>
+    <% } %>
+    </ul>
+</body>
+</html>
