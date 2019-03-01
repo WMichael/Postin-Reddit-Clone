@@ -8,19 +8,5 @@ var postSchema = mongoose.Schema({
     score: Number
 });
 
-var Post = mongoose.model('Post', postSchema);
-
-// var post = new Post({
-//     title: "Hello World!",
-//     queryName: "Hello-World!-Michael",
-//     url: null, 
-//     text: "This is the first post on Postin",
-//     user: "Michael",
-//     score: 0
-// });
-// post.save((err,res) => {
-//     console.log('Post inserted!', res);
-// });
-
-module.exports = Post;
+module.exports = mongoose.model('Post', postSchema);
 
