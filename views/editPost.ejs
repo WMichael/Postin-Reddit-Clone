@@ -5,15 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Postin - </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%- include('./partials/resources'); -%>
 </head>
 <body>
-    <%- include('./partials/header'); -%>
-    <form action="/post/<%= post.queryName %>/edit" method="post">
-        <input type="hidden" name="queryName" id="queryName" value="<%= post.queryName %>">
-        <input type="text" id="title" name="title" value="<%=post.title%>" placeholder="Title" required> <br>
-        <input type="text" id="url" name="url" value="<%=post.url%>" placeholder="Url"> <br>
-        <input type="text" id="text" name="text" value="<%=post.text%>" placeholder="Text" required> <br>
-        <input type="submit" value="Save">
-    </form>
+    <div class="container-fluid">
+        <%- include('./partials/header'); -%>
+        <form action="/post/<%= post.queryName %>/edit" method="post">
+            <input type="hidden" name="queryName" id="queryName" value="<%= post.queryName %>">
+            <input type="text" id="title" name="title" value="<%=post.title%>" placeholder="Title" required> <br>
+            <input type="text" id="url" name="url" value="<%=post.url%>" placeholder="Url"> <br>
+            <input type="text" id="text" name="text" value="<%=post.text%>" placeholder="Text" required> <br>
+            <input type="submit" value="Save">
+        </form>
+    </div>
 </body>
 </html>

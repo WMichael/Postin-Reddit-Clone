@@ -5,17 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Postin - <%= post.title %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%- include('./partials/resources'); -%>
 </head>
 <body>
-    <%- include('./partials/header'); -%>
-    <h2> <%= post.title %> (<%= post.score %>)</h2>
-    <p><%= post.text %></p>
-    <i><p>Posted by <%= post.user %></p></i>
-    <form action="/post/delete" method="post">
-        <input type="hidden" name="queryName" id="name" value="<%= post.queryName %>">
-        <input type="submit" value="Delete Post">
-    </form>
-    <br>
-    <a href="/post/<%=post.queryName%>/edit"><button>Edit Post</button></a> 
+    <div class="container-fluid">
+        <%- include('./partials/header'); -%>
+        <h2> <%= post.title %> (<%= post.score %>)</h2>
+        <p><%= post.text %></p>
+        <i><p>Posted by <%= post.user %></p></i>
+        <form action="/post/delete" method="post">
+            <input type="hidden" name="queryName" id="name" value="<%= post.queryName %>">
+            <input type="submit" value="Delete Post">
+        </form>
+        <br>
+        <a href="/post/<%=post.queryName%>/edit"><button>Edit Post</button></a> 
+    </div>  
 </body>
 </html>
