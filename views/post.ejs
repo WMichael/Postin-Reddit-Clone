@@ -10,7 +10,7 @@
 <body>
     <div class="container-fluid">
         <%- include('./partials/header'); -%>
-        <h2> <%= post.title %> (<%= post.score %>)</h2>
+        <h3> <%= post.title %> (<%= post.score %>)</h3>
         <p><%= post.text %></p>
         <i><p>Posted by <%= post.user %></p></i>
         <form action="/post/delete" method="post">

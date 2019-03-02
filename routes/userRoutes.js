@@ -24,7 +24,11 @@ router.get('/login', (req,res) => {
 });
 
 // Login Post 
-// router.post('/login', passport stuff here)
+router.post('/login', passport.authenticate('local-login', {
+    successRedirect : '/profile', // redirect to the secure profile section
+    failureRedirect : '/login', // redirect back to the signup page if there is an error
+    failureFlash : true // allow flash messages
+}));
 
 // Sign up 
 router.get('/signup', (req,res) => {
@@ -40,7 +44,7 @@ router.post('/signup', passport.authenticate('local-signup', {
 
 // Profile 
 // Protected, isLoggedIn is used to verify if user is logged in.
-router.get('/profile', isLoggedIn, (req, res) => {
+router.get('/profile', isLoggedIn, (req, res, err) => {
     res.render('profile', {user: req.user}); // Gets user out of session and passes to template.
 });
 

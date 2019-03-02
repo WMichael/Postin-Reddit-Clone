@@ -10,6 +10,8 @@
 <body>
     <div class="container-fluid">
         <%- include('./partials/header'); -%>
+
+        <h3>Edit Post</h3>
         <form action="/post/<%= post.queryName %>/edit" method="post">
             <input type="hidden" name="queryName" id="queryName" value="<%= post.queryName %>">
             <input type="text" id="title" name="title" value="<%=post.title%>" placeholder="Title" required> <br>

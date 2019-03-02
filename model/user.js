@@ -14,8 +14,14 @@ userSchema.methods.generateHash = (password) => {
 };
 
 // Check if password is valid
-userSchema.methods.validPassword = (password) => {
-    return bcrypt.compareSync(password, this.password);
+userSchema.methods.validPassword = (password, actPassword) => {
+    
+    if(password != null) {
+        return bcrypt.compareSync(password, actPassword); // Compare inputted password with actual password
+    }
+    else {
+        return false;
+    }
 };
 
 // Create the model for users and expose to app; 
