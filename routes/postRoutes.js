@@ -48,16 +48,20 @@ module.exports = (router,passport,isLoggedIn) => {
     })
 
     router.get('/post/:queryName/edit', (req, res) => {
-        Post.find({'queryName': req.params.queryName},(err, result) => {
-            if (result.length > 0) {
-                console.log(`Post found! ${result}`);
-                res.render('editPost', {post: result[0]});
-            }
-            else {
-                console.log('Post not found!');
-                res.send('Post does not exist');
-            }
-        });
+        if (typeof req.user == 'undefined') {
+            res.redirect('/');
+        } else {
+            Post.find({'queryName': req.params.queryName,  "user" : req.user.username},(err, result) => {
+                if (result.length > 0) {
+                    console.log(`Post found! ${result}`);
+                    res.render('editPost', {post: result[0]});
+                }
+                else {
+                    console.log('Post not found!');
+                    res.send('Post does not exist');
+                }
+             });
+        }
     });
 
     router.post('/post/:queryName/edit', (req, res) => {

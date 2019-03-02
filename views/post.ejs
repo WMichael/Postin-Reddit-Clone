@@ -13,12 +13,15 @@
         <h3> <%= post.title %> (<%= post.score %>)</h3>
         <p><%= post.text %></p>
         <i><p>Posted by <%= post.user %></p></i>
+
+        <% if(typeof user != 'undefined' && user.username == post.user) { %>
         <form action="/post/delete" method="post">
             <input type="hidden" name="queryName" id="name" value="<%= post.queryName %>">
             <input type="submit" value="Delete Post">
         </form>
         <br>
-        <a href="/post/<%=post.queryName%>/edit"><button>Edit Post</button></a> 
+        <a href="/post/<%=post.queryName%>/edit"><button>Edit Post</button></a>
+        <% } %> 
     </div>  
 </body>
 </html>
