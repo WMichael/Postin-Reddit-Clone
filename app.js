@@ -4,7 +4,6 @@ var mongoose = require('mongoose');
 var postRoutes = require('./routes/postRoutes');
 var userRoutes = require('./routes/userRoutes');
 
-
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 
