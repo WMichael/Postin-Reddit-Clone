@@ -9,7 +9,6 @@ var cookieParser = require('cookie-parser');
 // Configuration 
 var app = express(); 
 // var url = 'mongodb://localhost:27017/postin';
-// var url = "mongodb://admin:password1@ds243931.mlab.com:43931/heroku_7qv0mt3n"
 var url = process.env.MONGODB_URI;
 mongoose.connect(url, { useNewUrlParser: true});
 
