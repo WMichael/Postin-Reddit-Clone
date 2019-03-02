@@ -10,7 +10,7 @@ var cookieParser = require('cookie-parser');
 // Configuration 
 var app = express(); 
 // var url = 'mongodb://localhost:27017/postin';
-var url = require('./dbCred.js');
+var url = process.env.MONGODB_URI;
 mongoose.connect(url, { useNewUrlParser: true});
 
 app.use(morgan('dev'));
