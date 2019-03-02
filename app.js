@@ -1,10 +1,9 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var postRoutes = require('./routes/postRoutes');
-var userRoutes = require('./routes/userRoutes');
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
+let routes = require('./routes/routes');
 
 // Configuration 
 var app = express(); 
@@ -34,12 +33,13 @@ else {
 app.use(express.static('public'));
 
 // Routes 
-app.use('/', postRoutes);
-app.use('/', userRoutes);
+app.use('/', routes);
 
-app.get('/', function (req, res) {
-    res.redirect('/posts/');
-})
+// app.get('/', function (req, res) {
+//     res.redirect('/posts/');
+// })
+
+// var route = require('./routes/routes');
 
 mongoose.connection.once('open', () => {
     app.listen( port, function() {

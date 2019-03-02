@@ -1,7 +1,6 @@
-var express = require('express');
-var router = express.Router();
 var Post = require('../model/post.js');
 
+module.exports = (router) => {
     // Basic implementation of voting
     router.get('/post/:queryName/up', (req, res) => {
         Post.updateOne({"queryName": req.params.queryName}, {$inc: {"score": 1}}, () => { res.redirect('/posts/')})
@@ -30,7 +29,7 @@ var Post = require('../model/post.js');
     });
 
     router.get('/posts/new', (req, res) => {
-        res.render('newPost');
+        res.render('newPost',{user : req.user});
     });
 
     router.post('/posts/new', (req, res) => {
@@ -70,4 +69,6 @@ var Post = require('../model/post.js');
         },() => res.redirect('/post/' + req.body.queryName));
     });
 
-module.exports = router;
+}
+
+    

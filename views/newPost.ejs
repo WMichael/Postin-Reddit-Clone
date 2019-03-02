@@ -16,7 +16,7 @@
             <input type="text" id="title" name="title" placeholder="Title" required> <br>
             <input type="text" id="url" name="url" placeholder="Url"> <br>
             <input type="text" id="text" name="text" placeholder="Text" required> <br>
-            <input type="text" id="user" name="user" placeholder="User" required> <br>
+            <input type="hidden" id="user" name="user" value="<%= user.username%>" required> <br>
             <input type="submit" value="Save">
         </form>
     </div>
