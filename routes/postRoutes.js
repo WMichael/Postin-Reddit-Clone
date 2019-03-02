@@ -12,7 +12,7 @@ module.exports = (router,passport,isLoggedIn) => {
 
 
     // Post routes
-    router.get('/posts', (req, res) => {
+    router.get('/', (req, res) => {
         Post.find({}, (err,result) => {res.render('posts', {posts: result, user : req.user})});
     });
 
