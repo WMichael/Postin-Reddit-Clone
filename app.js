@@ -21,6 +21,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(express.static('public'));
+app.set('port', process.env.PORT || 3001);
 
 
 // Routes 
@@ -32,7 +33,7 @@ app.get('/', function (req, res) {
 })
 
 mongoose.connection.once('open', () => {
-    app.listen( 3001, function() {
+    app.listen( process.env.PORT, function() {
         console.log('Server started!');
     });
 })
