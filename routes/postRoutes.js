@@ -3,11 +3,11 @@ var Post = require('../model/post.js');
 module.exports = (router,passport,isLoggedIn) => {
     // Basic implementation of voting
     router.get('/post/:queryName/up', (req, res) => {
-        Post.updateOne({"queryName": req.params.queryName}, {$inc: {"score": 1}}, () => { res.redirect('/posts/')})
+        Post.updateOne({"queryName": req.params.queryName}, {$inc: {"score": 1}}, () => { res.redirect('/')})
     });
 
     router.get('/post/:queryName/down', (req, res) => {
-        Post.updateOne({"queryName": req.params.queryName}, {$inc: {"score": -1}}, () => { res.redirect('/posts/')})
+        Post.updateOne({"queryName": req.params.queryName}, {$inc: {"score": -1}}, () => { res.redirect('/')})
     });
 
     // Post routes
