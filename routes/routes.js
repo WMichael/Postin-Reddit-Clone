@@ -15,7 +15,19 @@ router.use(passport.initialize());
 router.use(passport.session()); // Persistent login sessions
 router.use(flash()); // use connect-flash for flash messages stored in session
 
-require('./postRoutes')(router,passport);
-require('./userRoutes')(router,passport);  
+require('./postRoutes')(router,passport,isLoggedIn);
+require('./userRoutes')(router,passport,isLoggedIn);  
+
+router.get('/', (req, res) => { res.redirect('/posts/')})
+
+// Seperate functions
+function isLoggedIn(req, res, next){
+    // if user is authenticated in the session, carry on
+    if (req.isAuthenticated()) {
+        return next();
+    }
+
+    res.redirect('/');
+}
 
 module.exports = router;

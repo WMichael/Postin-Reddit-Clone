@@ -1,7 +1,12 @@
 <h1>Postin</h1>
 <a href="/posts/">Posts</a> - 
 <a href="/posts/new">New Post</a> -
-<a href="/login">Login</a> - 
-<a href="/signup">Signup</a> 
+<% if (typeof user != 'undefined'){ %>
+    <a href="/profile"> <%= user.username %> </a> - 
+    <a href="/logout"> Log out</a>
+<% } else{ %>
+    <a href="/login">Login</a> - 
+    <a href="/signup">Signup</a> 
+<% } %> 
 <br>
 <br>

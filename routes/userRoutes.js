@@ -1,4 +1,4 @@
-module.exports = (router,passport) => {
+module.exports = (router,passport,isLoggedIn) => {
     require('../config/passport')(passport); // Passport for configuration
 
     // Routes for users
@@ -39,14 +39,6 @@ module.exports = (router,passport) => {
         res.redirect('/');
     });
 
-    // Seperate functions
-    function isLoggedIn(req, res, next){
-        // if user is authenticated in the session, carry on
-        if (req.isAuthenticated()) {
-            return next();
-        }
-
-        res.redirect('/');
-    }
+    
 
 }

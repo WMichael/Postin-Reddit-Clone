@@ -1,6 +1,6 @@
 var Post = require('../model/post.js');
 
-module.exports = (router) => {
+module.exports = (router,passport,isLoggedIn) => {
     // Basic implementation of voting
     router.get('/post/:queryName/up', (req, res) => {
         Post.updateOne({"queryName": req.params.queryName}, {$inc: {"score": 1}}, () => { res.redirect('/posts/')})
@@ -13,7 +13,7 @@ module.exports = (router) => {
 
     // Post routes
     router.get('/posts', (req, res) => {
-        Post.find({}, (err,result) => {res.render('posts', {posts: result})});
+        Post.find({}, (err,result) => {res.render('posts', {posts: result, user : req.user})});
     });
 
     router.get('/post/:queryName', (req, res) => {
@@ -28,7 +28,7 @@ module.exports = (router) => {
         });
     });
 
-    router.get('/posts/new', (req, res) => {
+    router.get('/posts/new', isLoggedIn, (req, res) => {
         res.render('newPost',{user : req.user});
     });
 
