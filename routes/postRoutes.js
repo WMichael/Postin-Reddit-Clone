@@ -10,7 +10,6 @@ module.exports = (router,passport,isLoggedIn) => {
         Post.updateOne({"queryName": req.params.queryName}, {$inc: {"score": -1}}, () => { res.redirect('/posts/')})
     });
 
-
     // Post routes
     router.get('/', (req, res) => {
         Post.find({}, (err,result) => {res.render('posts', {posts: result, user : req.user})});
@@ -18,7 +17,7 @@ module.exports = (router,passport,isLoggedIn) => {
 
     router.get('/post/:queryName', (req, res) => {
         Post.find({"queryName": req.params.queryName}, (err, result) => {
-            res.render('post',{post: result[0], number: 52});
+            res.render('post',{post: result[0], user : req.user});
         });
     });
 

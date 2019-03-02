@@ -10,9 +10,16 @@
 <body>
     <div class="container-fluid">
         <%- include('./partials/header'); -%>
-
         <h3>Profile</h3>
-        <p>Logged in as <%= user.username %></p>
+        <h3>Posts: </h3>
+        <ul>
+        <% for (let post of posts) {%> 
+            <li> 
+                <h3><a href="/post/<%=post.queryName%>"><%= post.title %></a> (<%= post.score %>)</a></h3>
+                <p><%= post.text %></p>
+            </li>
+        <% } %>
+        </ul>
     </div>
 </body>
 </html>

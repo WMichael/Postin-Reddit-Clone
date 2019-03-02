@@ -1,3 +1,5 @@
+var Post = require('../model/post.js');
+
 module.exports = (router,passport,isLoggedIn) => {
     require('../config/passport')(passport); // Passport for configuration
 
@@ -29,7 +31,8 @@ module.exports = (router,passport,isLoggedIn) => {
     // Profile 
     // Protected, isLoggedIn is used to verify if user is logged in.
     router.get('/profile', isLoggedIn, (req, res, err) => {
-        res.render('profile', {user: req.user}); // Gets user out of session and passes to template.
+        // Gets user out of session and passes to template.
+        Post.find({"user": req.user.username}, (err,result) => {res.render('profile', {posts: result, user : req.user})});
         console.log(req.user.username);
     });
 
