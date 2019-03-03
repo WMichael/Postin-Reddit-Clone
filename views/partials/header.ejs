@@ -3,34 +3,55 @@
       <a href="/" class="brand-logo center">Postin</a>
       <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
       <ul class="left hide-on-med-and-down">
-        <li><a href="/">Posts</a></li>
+        <li id="posts"><a href="/">Posts</a></li>
         <% if (typeof user != 'undefined'){ %>
-            <li><a href="/posts/new">New Post</a></li>
-            <li><a href="/profile"> <%= user.username %> </a></li>
+            <li id="new"><a href="/posts/new">New Post</a></li>
+            <li id="profile"><a href="/profile"> <%= user.username %> </a></li>
             <li><a href="/logout"> Log out</a></li>
         <% } else{ %>
-            <li><a href="/login">Login</a></li>
-            <li><a href="/signup">Signup</a></li>
+            <li id="login"><a href="/login">Login</a></li>
+            <li id="signup"><a href="/signup">Signup</a></li>
         <% } %> 
       </ul>
     </div>
 </nav>
 
 <ul class="sidenav" id="mobile-demo">
-    <li><a href="/">Posts</a></li>
+    <li id="posts"><a href="/">Posts</a></li>
         <% if (typeof user != 'undefined'){ %>
-            <li><a href="/posts/new">New Post</a></li>
-            <li><a href="/profile"> <%= user.username %> </a></li>
+            <li id="new"><a href="/posts/new">New Post</a></li>
+            <li id="profile"><a href="/profile"> <%= user.username %> </a></li>
             <li><a href="/logout"> Log out</a></li>
         <% } else{ %>
-            <li><a href="/login">Login</a></li>
-            <li><a href="/signup">Signup</a></li>
+            <li id="login"><a href="/login">Login</a></li>
+            <li id="signup"><a href="/signup">Signup</a></li>
         <% } %>
   </ul>
         
+
 <script> 
   document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.sidenav');
     var instances = M.Sidenav.init(elems, {});
+    
+    // Set active class to a certain li to denote current page. 
+    switch(location.pathname) {
+      case "/": 
+        document.getElementById('posts').className = "active";
+        break;
+      case "/posts/new": 
+        document.getElementById('new').className = "active";
+        break;
+      case "/profile": 
+        document.getElementById('profile').className = "active";
+        break;
+      case "/login": 
+        document.getElementById('login').className = "active";
+        break;
+      case "/signup": 
+        document.getElementById('signup').className = "active";
+        break;
+      }
+
   });
 </script>
