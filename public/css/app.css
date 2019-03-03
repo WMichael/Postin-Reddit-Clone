@@ -1,0 +1,11 @@
+#toast-container {
+    min-width: 10%;
+    top: 50%;
+    right: 50%;
+    transform: translateX(50%) translateY(50%);
+  }
+
+/* Override button input text to change colour to white. */
+.waves-button-input {
+  color: white;
+}

@@ -1,18 +1,20 @@
 var Post = require('../model/post.js');
 
-module.exports = (router,passport,isLoggedIn) => {
+module.exports = (router,passport,isLoggedIn,checkIfCanVote) => {
     // Basic implementation of voting
-    router.get('/post/:queryName/up', (req, res) => {
-        Post.updateOne({"queryName": req.params.queryName}, {$inc: {"score": 1}}, () => { res.redirect('/')})
+    router.get('/post/:queryName/up', checkIfCanVote, (req, res) => {
+        Post.updateOne({"queryName": req.params.queryName}, {$inc: {"score": 1}}, () => {
+            res.redirect('/')})
     });
 
-    router.get('/post/:queryName/down', (req, res) => {
-        Post.updateOne({"queryName": req.params.queryName}, {$inc: {"score": -1}}, () => { res.redirect('/')})
+    router.get('/post/:queryName/down', checkIfCanVote, (req, res) => {
+        Post.updateOne({"queryName": req.params.queryName}, {$inc: {"score": -1}}, () => {
+            res.redirect('/')})
     });
 
     // Post routes
     router.get('/', (req, res) => {
-        Post.find({}, (err,result) => {res.render('posts', {posts: result, user : req.user})});
+        Post.find({}, (err,result) => {res.render('posts', {message: req.flash('message'), posts: result.sort((a,b) => {return b.score - a.score}), user : req.user})});
     });
 
     router.get('/post/:queryName', (req, res) => {

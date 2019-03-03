@@ -10,6 +10,10 @@
 <body>
     <%- include('./partials/header'); -%>
     <div class="container">
+        <% if (message.length > 0) { %>
+            <script> M.toast({html: '<center> <%= message %> </center>'}) </script>
+        <% } %>
+
     <ul>
     <% for (let post of posts) {%> 
         <li> 

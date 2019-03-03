@@ -13,7 +13,7 @@
         <h3>Signup</h3>
         <!-- show any messages that come back with authentication -->
         <% if (message.length > 0) { %>
-            <div class="alert alert-danger"><%= message %></div>
+            <script> M.toast({html: '<center> <%= message %> </center>'}) </script>
         <% } %>
         
         <form action="/signup" method="post">

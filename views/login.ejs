@@ -10,15 +10,15 @@
 <body>
     <%- include('./partials/header'); -%>
         <div class="container">
+            <% if (message.length > 0) { %>
+                <script> M.toast({html: '<center> <%= message %> </center>'}) </script>
+            <% } %>
 
         <h3>Login</h3>
-        <!-- show any messages that come back with authentication -->
-        <% if (message.length > 0) { %>
-            <div class="alert alert-danger"><%= message %></div>
-        <% } %>
 
         <!-- LOGIN FORM -->
         <form action="/login" method="post">
+        
             <div class="form-group">
                 <label>Username</label>
                 <input type="text" class="form-control" name="username">

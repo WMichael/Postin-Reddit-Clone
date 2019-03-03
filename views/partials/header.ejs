@@ -17,14 +17,14 @@
 </nav>
 
 <ul class="sidenav" id="mobile-demo">
-    <li id="posts"><a href="/">Posts</a></li>
+    <li id="sposts"><a href="/">Posts</a></li>
         <% if (typeof user != 'undefined'){ %>
-            <li id="new"><a href="/posts/new">New Post</a></li>
-            <li id="profile"><a href="/profile"> <%= user.username %> </a></li>
+            <li id="snew"><a href="/posts/new">New Post</a></li>
+            <li id="sprofile"><a href="/profile"> <%= user.username %> </a></li>
             <li><a href="/logout"> Log out</a></li>
         <% } else{ %>
-            <li id="login"><a href="/login">Login</a></li>
-            <li id="signup"><a href="/signup">Signup</a></li>
+            <li id="slogin"><a href="/login">Login</a></li>
+            <li id="ssignup"><a href="/signup">Signup</a></li>
         <% } %>
   </ul>
         
@@ -38,18 +38,23 @@
     switch(location.pathname) {
       case "/": 
         document.getElementById('posts').className = "active";
+        document.getElementById('sposts').className = "active";
         break;
       case "/posts/new": 
         document.getElementById('new').className = "active";
+        document.getElementById('snew').className = "active";
         break;
       case "/profile": 
         document.getElementById('profile').className = "active";
+        document.getElementById('sprofile').className = "active";
         break;
       case "/login": 
         document.getElementById('login').className = "active";
+        document.getElementById('slogin').className = "active";
         break;
       case "/signup": 
         document.getElementById('signup').className = "active";
+        document.getElementById('ssignup').className = "active";
         break;
       }
 

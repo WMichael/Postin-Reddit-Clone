@@ -17,10 +17,10 @@
         <% if(typeof user != 'undefined' && user.username == post.user) { %>
         <form action="/post/delete" method="post">
             <input type="hidden" name="queryName" id="name" value="<%= post.queryName %>">
-            <input type="submit" value="Delete Post">
+            <input class="waves-effect waves-light btn" type="submit" value="Delete">
         </form>
         <br>
-        <a href="/post/<%=post.queryName%>/edit"><button>Edit Post</button></a>
+        <a class="waves-effect waves-light btn" href="/post/<%=post.queryName%>/edit">Edit</a>
         <% } %> 
     </div>  
 </body>

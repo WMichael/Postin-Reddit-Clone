@@ -15,7 +15,7 @@ router.use(passport.initialize());
 router.use(passport.session()); // Persistent login sessions
 router.use(flash()); // use connect-flash for flash messages stored in session
 
-require('./postRoutes')(router,passport,isLoggedIn);
+require('./postRoutes')(router,passport,isLoggedIn,checkIfCanVote);
 require('./userRoutes')(router,passport,isLoggedIn);  
 
 router.get('/', (req, res) => { res.redirect('/posts/')})
@@ -27,6 +27,16 @@ function isLoggedIn(req, res, next){
         return next();
     }
 
+    res.redirect('/');
+}
+
+function checkIfCanVote(req, res, next) {
+    // if user is authenticated in the session, carry on
+    if (req.isAuthenticated()) {
+        return next();
+    }
+
+    req.flash('message', 'You need to log in to vote!');
     res.redirect('/');
 }
 
