@@ -16,7 +16,9 @@
             <input type="hidden" name="queryName" id="queryName" value="<%= post.queryName %>">
             <input type="text" id="title" name="title" value="<%=post.title%>" placeholder="Title" required> <br>
             <input type="text" id="url" name="url" value="<%=post.url%>" placeholder="Url"> <br>
-            <input type="text" id="text" name="text" value="<%=post.text%>" placeholder="Text" required> <br>
+            <div class="input-field">
+                <textarea type="text" class="materialize-textarea" id="text" name="text" placeholder="Text" required><%=post.text%></textarea> <br>
+            </div>
             <button class="btn waves-effect waves-light" type="submit" name="action" value="Save">Save
                     <i class="material-icons right">send</i>
                 </button>   

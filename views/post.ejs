@@ -9,19 +9,39 @@
 </head>
 <body>
     <%- include('./partials/header'); -%>
-        <div class="container">
-        <h3> <%= post.title %> (<%= post.score %>)</h3>
-        <p><%= post.text %></p>
-        <i><p>Posted by <%= post.user %></p></i>
+    <div class="container">
+        <div class="row post postSingle">
+            <div class="col s12 m12">
+                <div class="card #f5f5f5 grey lighten-4">
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="col s1">
+                                <a class="voteArrow" href="/post/<%=post.queryName%>/up"><i class="small material-icons">arrow_upward</i></a>
+                                <a class="voteArrow" href="/post/<%=post.queryName%>/down"><i class="small material-icons">arrow_downward</i></a>
+                            </div>
+                            <div class="col s11">
+                                <span class="card-title">
+                                    <a href="/post/<%=post.queryName%>"><b><%= post.score %></b> <%= post.title %></a> 
+                                </span>
+                                <p><%= post.text %></p>
+                                <br> <p>Posted by: <%= post.user %></p>
+                            </div>
+                        </div>
+                    </div>
+                    <% if(typeof user != 'undefined' && user.username == post.user) { %>
+                        <div class="card-action">
+                        <form class="deleteBtn" action="/post/delete" method="post">
+                            <input type="hidden" name="queryName" id="name" value="<%= post.queryName %>">
+                            <input class="waves-effect waves-light btn" type="submit" value="Delete">
+                        </form>
+                        <a class="waves-effect waves-light btn" href="/post/<%=post.queryName%>/edit">Edit</a>
+                        </div>
+                        <% } %> 
+                </div>
+            </div>
+        </div>
 
-        <% if(typeof user != 'undefined' && user.username == post.user) { %>
-        <form action="/post/delete" method="post">
-            <input type="hidden" name="queryName" id="name" value="<%= post.queryName %>">
-            <input class="waves-effect waves-light btn" type="submit" value="Delete">
-        </form>
-        <br>
-        <a class="waves-effect waves-light btn" href="/post/<%=post.queryName%>/edit">Edit</a>
-        <% } %> 
-    </div>  
+        
+</div>  
 </body>
 </html>

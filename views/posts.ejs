@@ -16,12 +16,33 @@
 
     <ul>
     <% for (let post of posts) {%> 
-        <li> 
-            <h4><a href="/post/<%=post.queryName%>"><%= post.title %></a> (<%= post.score %>)
-                <a href="/post/<%=post.queryName%>/up"><i class="small material-icons">arrow_upward</i></a>
-                <a href="/post/<%=post.queryName%>/down"><i class="small material-icons">arrow_downward</i></a> </h4>
-            <p><%= post.text %>  <br> <i>Posted by: <%= post.user %></i></p>
-        </li>
+        <div class="row post">
+            <div class="col s12 m6">
+                <div class="card #f5f5f5 grey lighten-4">
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="col s2">
+                                <a class="voteArrow" href="/post/<%=post.queryName%>/up"><i class="small material-icons">arrow_upward</i></a>
+                                <a class="voteArrow" href="/post/<%=post.queryName%>/down"><i class="small material-icons">arrow_downward</i></a>
+                            </div>
+                            <div class="col s10">
+                                <span class="card-title">
+                                    
+                                    <a href="/post/<%=post.queryName%>"><b><%= post.score %></b> <%= post.title %></a> 
+                                </span>
+                                <p><%= (post.text.length > 200) ? post.text.substring(0,199)+"..." : post.text%></p>
+                                <br> <p>Posted by: <%= post.user %></p>
+                            </div>
+                        </div>
+                    </div>
+                        <!-- <div class="card-action">
+                        <a href="#">This is a link</a>
+                        <a href="#">This is a link</a>
+                        </div> -->
+                </div>
+            </div>
+        </div>
+        
     <% } %>
     </ul>
     </div>

@@ -9,13 +9,14 @@
 </head>
 <body>
     <%- include('./partials/header'); -%>
-        <div class="container">
-
+    <div class="container">
         <h3>New Post</h3>
         <form action="/posts/new" method="post">
             <input type="text" id="title" name="title" placeholder="Title" required> <br>
             <input type="text" id="url" name="url" placeholder="Url"> <br>
-            <input type="text" id="text" name="text" placeholder="Text" required> <br>
+            <div class="input-field">
+                <textarea type="text" class="materialize-textarea" id="text" name="text" placeholder="Text" required></textarea> <br>
+            </div>
             <input type="hidden" id="user" name="user" value="<%= user.username%>" required> <br>
             <button class="btn waves-effect waves-light" type="submit" name="action" value="Save">Submit
                 <i class="material-icons right">send</i>

@@ -9,3 +9,25 @@
 .waves-button-input {
   color: white;
 }
+
+.post {
+  color: black;
+  margin-bottom: 1px;
+}
+
+.postSingle {
+  margin-top: 14px;
+}
+
+.deleteBtn {
+  display: inline;
+}
+
+.voteArrow {
+  color: #757575;
+  
+}
+
+.voteArrow:hover {
+  color: #212121;
+}
