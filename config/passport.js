@@ -81,6 +81,7 @@ module.exports = (passport) => {
                     // Set credentials
                     newUser.username = username;
                     newUser.password = newUser.generateHash(password);
+                    newUser.registrationDate = Date.now(); 
 
                     // Save the user
                     newUser.save((err) => {

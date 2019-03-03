@@ -13,7 +13,7 @@
         <h2>Profile</h2>
         <h3>Info: </h3>
         <p>Username: <b><%=user.username%></b></p>
-        <p>Registered: </p>
+        <p>Registered: <%=user.registrationDate.getUTCDate()%>/<%=user.registrationDate.getUTCMonth() + 1%>/<%=user.registrationDate.getUTCFullYear()%></p>
         <h3>Posts: </h3>
         <ul>
         <% for (let post of posts) {%> 
