@@ -36,12 +36,6 @@ app.use(express.static('public'));
 // Routes 
 app.use('/', routes);
 
-// app.get('/', function (req, res) {
-//     res.redirect('/posts/');
-// })
-
-// var route = require('./routes/routes');
-
 mongoose.connection.once('open', () => {
     app.listen( port, function() {
         console.log('Server started!');

@@ -20,7 +20,7 @@ require('./userRoutes')(router,passport,isLoggedIn);
 
 router.get('/', (req, res) => { res.redirect('/posts/')})
 
-// Seperate functions
+// Middleware functions
 function isLoggedIn(req, res, next){
     // if user is authenticated in the session, carry on
     if (req.isAuthenticated()) {

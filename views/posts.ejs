@@ -8,12 +8,14 @@
     <%- include('./partials/resources'); -%>
 </head>
 <body>
-    <div class="container-fluid">
     <%- include('./partials/header'); -%>
+    <div class="container">
     <ul>
     <% for (let post of posts) {%> 
         <li> 
-            <h2><a href="/post/<%=post.queryName%>"><%= post.title %></a> (<%= post.score %>) <a href="/post/<%=post.queryName%>/up">^</a><a href="/post/<%=post.queryName%>/down">v</a></h2>
+            <h4><a href="/post/<%=post.queryName%>"><%= post.title %></a> (<%= post.score %>)
+                <a href="/post/<%=post.queryName%>/up"><i class="small material-icons">arrow_upward</i></a>
+                <a href="/post/<%=post.queryName%>/down"><i class="small material-icons">arrow_downward</i></a> </h4>
             <p><%= post.text %>  <br> <i>Posted by: <%= post.user %></i></p>
         </li>
     <% } %>

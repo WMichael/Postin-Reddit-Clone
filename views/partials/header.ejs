@@ -1,12 +1,36 @@
-<h1>Postin</h1>
-<a href="/">Posts</a> - 
-<a href="/posts/new">New Post</a> -
-<% if (typeof user != 'undefined'){ %>
-    <a href="/profile"> <%= user.username %> </a> - 
-    <a href="/logout"> Log out</a>
-<% } else{ %>
-    <a href="/login">Login</a> - 
-    <a href="/signup">Signup</a> 
-<% } %> 
-<br>
-<br>
+<nav>
+    <div class="nav-wrapper teal lighten-2 class">
+      <a href="/" class="brand-logo center">Postin</a>
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <ul class="left hide-on-med-and-down">
+        <li><a href="/">Posts</a></li>
+        <% if (typeof user != 'undefined'){ %>
+            <li><a href="/posts/new">New Post</a></li>
+            <li><a href="/profile"> <%= user.username %> </a></li>
+            <li><a href="/logout"> Log out</a></li>
+        <% } else{ %>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/signup">Signup</a></li>
+        <% } %> 
+      </ul>
+    </div>
+</nav>
+
+<ul class="sidenav" id="mobile-demo">
+    <li><a href="/">Posts</a></li>
+        <% if (typeof user != 'undefined'){ %>
+            <li><a href="/posts/new">New Post</a></li>
+            <li><a href="/profile"> <%= user.username %> </a></li>
+            <li><a href="/logout"> Log out</a></li>
+        <% } else{ %>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/signup">Signup</a></li>
+        <% } %>
+  </ul>
+        
+<script> 
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems, {});
+  });
+</script>

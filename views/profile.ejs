@@ -8,14 +8,17 @@
     <%- include('./partials/resources'); -%>
 </head>
 <body>
-    <div class="container-fluid">
-        <%- include('./partials/header'); -%>
-        <h3>Profile</h3>
+    <%- include('./partials/header'); -%>
+        <div class="container">
+        <h2>Profile</h2>
+        <h3>Info: </h3>
+        <p>Username: <b><%=user.username%></b></p>
+        <p>Registered: </p>
         <h3>Posts: </h3>
         <ul>
         <% for (let post of posts) {%> 
             <li> 
-                <h3><a href="/post/<%=post.queryName%>"><%= post.title %></a> (<%= post.score %>)</a></h3>
+                <h4><a href="/post/<%=post.queryName%>"><%= post.title %></a> (<%= post.score %>)</a></h4>
                 <p><%= post.text %></p>
             </li>
         <% } %>

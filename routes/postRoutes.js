@@ -23,7 +23,7 @@ module.exports = (router,passport,isLoggedIn) => {
 
     router.post('/post/delete', (req,res) => {
         Post.deleteOne({"queryName": req.body.queryName}, () => {
-            res.redirect('/posts/');
+            res.redirect('/');
         });
     });
 
@@ -54,7 +54,7 @@ module.exports = (router,passport,isLoggedIn) => {
             Post.find({'queryName': req.params.queryName,  "user" : req.user.username},(err, result) => {
                 if (result.length > 0) {
                     console.log(`Post found! ${result}`);
-                    res.render('editPost', {post: result[0]});
+                    res.render('editPost', {post: result[0], user: req.user});
                 }
                 else {
                     console.log('Post not found!');
