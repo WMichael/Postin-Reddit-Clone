@@ -5,7 +5,8 @@ var postSchema = mongoose.Schema({
     url: String,
     text: String,
     user: String,
-    score: Number
+    score: Number,
+    datePosted: Date
 });
 
 module.exports = mongoose.model('Post', postSchema);

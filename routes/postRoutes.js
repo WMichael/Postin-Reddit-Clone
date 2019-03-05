@@ -74,6 +74,7 @@ module.exports = (router,passport,isLoggedIn,checkIfCanVote) => {
             "url": req.body.url,
             "text": req.body.text,
             "user": req.body.user,
+            "datePosted" : Date.now(),
             "score": 0
         });
         post.save((err,result) => {
