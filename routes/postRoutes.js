@@ -1,15 +1,48 @@
 var Post = require('../model/post.js');
+var User = require('../model/user.js');
 
 module.exports = (router,passport,isLoggedIn,checkIfCanVote) => {
-    // Basic implementation of voting
-    router.get('/post/:queryName/up', checkIfCanVote, (req, res) => {
-        Post.updateOne({"queryName": req.params.queryName}, {$inc: {"score": 1}}, () => {
-            res.redirect('/')})
+    //Implementation of voting
+    router.get('/post/:queryName/up/:prevPath', checkIfCanVote, (req, res) => {
+        // Looks for user in DB
+        User.find({username : req.user.username}, (err, result) => {
+            // Checks whether post is found in postsUpVoted, if that's true then it means the user can't upvote it again.
+            if (result[0].postsUpVoted.includes(req.params.queryName)) { 
+                // Redirect to same path but remove up from the path name. 
+                (req.params.prevPath == "post") ?res.redirect("/post/" + req.params.queryName) : res.redirect("/");
+            }
+            else {
+                 // Add post to uesr postsUpVoted array
+                User.updateOne({username : req.user.username},{"$push":{"postsUpVoted": req.params.queryName}}).exec((err, raw) =>{
+                    if (err) return handleError(err);
+                });
+                // If in postsDownVoted, remove it
+                User.updateOne({username : req.user.username},{"$pull":{"postsDownVoted": req.params.queryName}}).exec((err, raw) =>{
+                    if (err) return handleError(err);
+                });
+                // Increments the post's score and redirects user to the path it was on
+                Post.updateOne({"queryName": req.params.queryName}, {$inc: {"score": 1}}, () => {
+                    (req.params.prevPath == "post") ?res.redirect("/post/" + req.params.queryName) : res.redirect("/");});
+            }
+        });
     });
 
-    router.get('/post/:queryName/down', checkIfCanVote, (req, res) => {
-        Post.updateOne({"queryName": req.params.queryName}, {$inc: {"score": -1}}, () => {
-            res.redirect('/')})
+    router.get('/post/:queryName/down/:prevPath', checkIfCanVote, (req, res) => {
+        User.find({username : req.user.username}, (err, result) => {
+            if (result[0].postsDownVoted.includes(req.params.queryName)) { 
+                (req.params.prevPath == "post") ? res.redirect("/post/" + req.params.queryName) : res.redirect("/");
+            }
+            else {
+                User.updateOne({username : req.user.username},{"$push":{"postsDownVoted": req.params.queryName}}).exec((err, raw) =>{
+                    if (err) return handleError(err);
+                });
+                User.updateOne({username : req.user.username},{"$pull":{"postsUpVoted": req.params.queryName}}).exec((err, raw) =>{
+                    if (err) return handleError(err);
+                });
+                Post.updateOne({"queryName": req.params.queryName}, {$inc: {"score": -1}}, () => {
+                    (req.params.prevPath == "post") ? res.redirect("/post/" + req.params.queryName) : res.redirect("/");})
+            }
+        });
     });
 
     // Post routes

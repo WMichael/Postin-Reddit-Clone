@@ -1,6 +1,6 @@
 #toast-container {
     min-width: 10%;
-    top: 50%;
+    top: 80%;
     right: 50%;
     transform: translateX(50%) translateY(50%);
   }
@@ -25,6 +25,7 @@
 
 .voteArrow {
   color: #757575;
+  display: block;
   
 }
 

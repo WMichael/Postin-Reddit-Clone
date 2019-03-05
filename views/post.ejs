@@ -16,12 +16,13 @@
                     <div class="card-content">
                         <div class="row">
                             <div class="col s1">
-                                <a class="voteArrow" href="/post/<%=post.queryName%>/up"><i class="small material-icons">arrow_upward</i></a>
-                                <a class="voteArrow" href="/post/<%=post.queryName%>/down"><i class="small material-icons">arrow_downward</i></a>
+                                <a class="center-align voteArrow" href="/post/<%=post.queryName%>/up/post"><i class="small material-icons">arrow_upward</i></a>
+                                <h5 class="center-align"><%= post.score %></h5>
+                                <a class="center-align voteArrow" href="/post/<%=post.queryName%>/down/post"><i class="small material-icons">arrow_downward</i></a>
                             </div>
                             <div class="col s11">
                                 <span class="card-title">
-                                    <a href="/post/<%=post.queryName%>"><b><%= post.score %></b> <%= post.title %></a> 
+                                    <a href="/post/<%=post.queryName%>"><%= post.title %></a> 
                                 </span>
                                 <p><%= post.text %></p>
                                 <br> <p>Posted by: <%= post.user %></p>
