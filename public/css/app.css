@@ -26,7 +26,10 @@
 .voteArrow {
   color: #757575;
   display: block;
-  
+}
+
+.curVoteArrow {
+  color: #212121;
 }
 
 .voteArrow:hover {

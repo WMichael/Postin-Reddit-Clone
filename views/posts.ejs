@@ -22,9 +22,23 @@
                     <div class="card-content">
                         <div class="row">
                             <div class="col s2 m1">
-                                <a class="center-align voteArrow" href="/post/<%=post.queryName%>/up/home"><i class="small material-icons">arrow_upward</i></a>
-                                <h5 class="center-align"><%= post.score %></h5>
-                                <a class="center-align voteArrow" href="/post/<%=post.queryName%>/down/home"><i class="small material-icons">arrow_downward</i></a>
+                                <% if (typeof user == "undefined") { %>
+                                    <a class="center-align voteArrow" href="/post/<%=post.queryName%>/up/home"><i class="small material-icons">arrow_upward</i></a>
+                                    <h5 class="center-align"><%= post.score %></h5>
+                                    <a class="center-align voteArrow" href="/post/<%=post.queryName%>/down/home"><i class="small material-icons">arrow_downward</i></a>
+                                <% }else if (user.postsUpVoted.includes(post.queryName)) { %>
+                                    <a class="center-align voteArrow curVoteArrow" href="/post/<%=post.queryName%>/up/home"><i class="small material-icons">arrow_upward</i></a>
+                                    <h5 class="center-align"><%= post.score %></h5>
+                                    <a class="center-align voteArrow" href="/post/<%=post.queryName%>/down/home"><i class="small material-icons">arrow_downward</i></a>
+                                <% }else if(user.postsDownVoted.includes(post.queryName)){ %>
+                                    <a class="center-align voteArrow" href="/post/<%=post.queryName%>/up/home"><i class="small material-icons">arrow_upward</i></a>
+                                    <h5 class="center-align"><%= post.score %></h5>
+                                    <a class="center-align voteArrow curVoteArrow" href="/post/<%=post.queryName%>/down/home"><i class="small material-icons">arrow_downward</i></a>
+                                <% }else{ %>
+                                    <a class="center-align voteArrow" href="/post/<%=post.queryName%>/up/home"><i class="small material-icons">arrow_upward</i></a>
+                                    <h5 class="center-align"><%= post.score %></h5>
+                                    <a class="center-align voteArrow" href="/post/<%=post.queryName%>/down/home"><i class="small material-icons">arrow_downward</i></a>
+                                <%} %>   
                             </div>
                             <div class="col s10 m11">
                                 <span class="card-title">

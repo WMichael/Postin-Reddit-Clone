@@ -4,45 +4,58 @@ var User = require('../model/user.js');
 module.exports = (router,passport,isLoggedIn,checkIfCanVote) => {
     //Implementation of voting
     router.get('/post/:queryName/up/:prevPath', checkIfCanVote, (req, res) => {
-        // Looks for user in DB
-        User.find({username : req.user.username}, (err, result) => {
-            // Checks whether post is found in postsUpVoted, if that's true then it means the user can't upvote it again.
-            if (result[0].postsUpVoted.includes(req.params.queryName)) { 
-                // Redirect to same path but remove up from the path name. 
-                (req.params.prevPath == "post") ?res.redirect("/post/" + req.params.queryName) : res.redirect("/");
-            }
-            else {
-                 // Add post to uesr postsUpVoted array
-                User.updateOne({username : req.user.username},{"$push":{"postsUpVoted": req.params.queryName}}).exec((err, raw) =>{
-                    if (err) return handleError(err);
+        let scoreChange = 1; // If post is currently downvoted then the upvote will increment score by 2 else it will be by 1.
+
+        // Checks whether post is found in postsUpVoted, if found then it removes the up vote and decreases post's score.
+        if (req.user.postsUpVoted.includes(req.params.queryName)) {
+            User.updateOne({username : req.user.username},{"$pull":{"postsUpVoted": req.params.queryName}}).exec((err, raw) =>{
+                Post.updateOne({"queryName": req.params.queryName}, {$inc: {"score": -1}}, () => {
+                        // Redirect to same path but remove up from the path name. 
+                        (req.params.prevPath == "post") ?res.redirect("/post/" + req.params.queryName) : res.redirect("/");
                 });
-                // If in postsDownVoted, remove it
-                User.updateOne({username : req.user.username},{"$pull":{"postsDownVoted": req.params.queryName}}).exec((err, raw) =>{
-                    if (err) return handleError(err);
+            });
+            
+        } else {
+            // Add post to user postsUpVoted array
+            User.updateOne({username : req.user.username},{"$push":{"postsUpVoted": req.params.queryName}}).exec((err, raw) =>{
+            });
+            
+            // If in postsDownVoted, remove it and add 2 to score
+            if(req.user.postsDownVoted.includes(req.params.queryName)) {
+                User.updateOne({username : req.user.username},{"$pull":{"postsDownVoted": req.params.queryName}}).exec((err, raw) =>{    
                 });
-                // Increments the post's score and redirects user to the path it was on
-                Post.updateOne({"queryName": req.params.queryName}, {$inc: {"score": 1}}, () => {
-                    (req.params.prevPath == "post") ?res.redirect("/post/" + req.params.queryName) : res.redirect("/");});
-            }
-        });
+                scoreChange = 2;
+            } 
+            
+            // Increments the post's score and redirects user to the path it was on
+            Post.updateOne({"queryName": req.params.queryName}, {$inc: {"score": scoreChange}}, () => {
+                (req.params.prevPath == "post") ?res.redirect("/post/" + req.params.queryName) : res.redirect("/");});
+        }
+    
     });
 
     router.get('/post/:queryName/down/:prevPath', checkIfCanVote, (req, res) => {
-        User.find({username : req.user.username}, (err, result) => {
-            if (result[0].postsDownVoted.includes(req.params.queryName)) { 
-                (req.params.prevPath == "post") ? res.redirect("/post/" + req.params.queryName) : res.redirect("/");
-            }
-            else {
+        let scoreChange = -1;
+
+            if (req.user.postsDownVoted.includes(req.params.queryName)) { 
+                User.updateOne({username : req.user.username},{"$pull":{"postsDownVoted": req.params.queryName}}).exec((err, raw) =>{
+                    Post.updateOne({"queryName": req.params.queryName}, {$inc: {"score": 1}}, () => {
+                         // Redirect to same path but remove up from the path name. 
+                         (req.params.prevPath == "post") ?res.redirect("/post/" + req.params.queryName) : res.redirect("/");
+                    });
+                });            
+            } else {
                 User.updateOne({username : req.user.username},{"$push":{"postsDownVoted": req.params.queryName}}).exec((err, raw) =>{
-                    if (err) return handleError(err);
                 });
-                User.updateOne({username : req.user.username},{"$pull":{"postsUpVoted": req.params.queryName}}).exec((err, raw) =>{
-                    if (err) return handleError(err);
-                });
-                Post.updateOne({"queryName": req.params.queryName}, {$inc: {"score": -1}}, () => {
+
+                if(req.user.postsUpVoted.includes(req.params.queryName)) {
+                    User.updateOne({username : req.user.username},{"$pull":{"postsUpVoted": req.params.queryName}}).exec((err, raw) =>{
+                    });
+                    scoreChange = -2;
+                }
+                Post.updateOne({"queryName": req.params.queryName}, {$inc: {"score": scoreChange}}, () => {
                     (req.params.prevPath == "post") ? res.redirect("/post/" + req.params.queryName) : res.redirect("/");})
             }
-        });
     });
 
     // Post routes
