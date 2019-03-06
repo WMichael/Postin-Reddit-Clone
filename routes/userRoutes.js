@@ -23,7 +23,7 @@ module.exports = (router,passport,isLoggedIn) => {
 
     // Sign up Post 
     router.post('/signup', passport.authenticate('local-signup', {
-        successRedirect : '/profile',
+        successRedirect : '/',
         failureRedirect : '/signup',
         failureFlash : true
     }));
@@ -32,7 +32,7 @@ module.exports = (router,passport,isLoggedIn) => {
     // Protected, isLoggedIn is used to verify if user is logged in.
     router.get('/profile', isLoggedIn, (req, res, err) => {
         // Gets user out of session and passes to template.
-        Post.find({"user": req.user.username}, (err,result) => {res.render('profile', {posts: result, user : req.user})});
+        Post.find({"user": req.user.username}, (err,result) => {res.render('profile', {posts: result, user : req.user, karma : getKarma(result)})});
         console.log(req.user.username);
     });
 
@@ -42,6 +42,17 @@ module.exports = (router,passport,isLoggedIn) => {
         res.redirect('/');
     });
 
-    
-
+    // Other functions
+    // Function to get the karma of a user. 
+    function getKarma(posts) {
+        if (posts.length > 1) {
+            return posts.reduce((a, b) => a.score + b.score);
+        }
+        else if(posts.length == 1) {
+            return posts[0].score;
+        }
+        else {
+            return 0;
+        }
+    }
 }

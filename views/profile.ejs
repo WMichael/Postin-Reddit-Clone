@@ -16,7 +16,7 @@
                     <li class="collection-header"><h4>Info:</h4></li>
                     <li class="collection-item">Username: <%=user.username%></li>
                     <li class="collection-item">Registered: <%=user.registrationDate.getUTCDate()%>/<%=user.registrationDate.getUTCMonth() + 1%>/<%=user.registrationDate.getUTCFullYear()%></li>
-                    <li class="collection-item">Karma: <%= (posts.length > 1) ? posts.reduce((a, b) => a.score + b.score) : posts[0].score %></li>
+                    <li class="collection-item">Karma: <%= karma %></li>
                     <li class="collection-item">Number of Posts: <%= posts.length %></li>
                 </ul>
             </div>
