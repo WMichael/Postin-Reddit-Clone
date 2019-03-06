@@ -18,6 +18,6 @@ node app.js 3001
 
 ## Features to be added 
 - Comments
-
+- Channels (Subreddits) 
 
 
