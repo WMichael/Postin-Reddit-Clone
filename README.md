@@ -5,6 +5,7 @@ My first NodeJS Express project, replicating some of the features found in Reddi
 ## Features
 - Posts 
 - User authentication using PassportJS
+- Voting
 
 ## How to deploy/run the web application
 
@@ -17,7 +18,6 @@ node app.js 3001
 
 ## Features to be added 
 - Comments
-- Voting
 
 
 
