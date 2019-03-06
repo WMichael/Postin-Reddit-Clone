@@ -22,7 +22,7 @@
                             </div>
                             <div class="col s11">
                                 <span class="card-title">
-                                    <a href="/post/<%=post.queryName%>"><%= post.title %></a> 
+                                    <%= post.title %>
                                 </span>
                                 <p><%= post.text %></p>
                                 <br> <p>Posted by <b><%= post.user %></b> on <%=post.datePosted.getUTCDate()%>/<%=post.datePosted.getUTCMonth() + 1%>/<%=post.datePosted.getUTCFullYear()%></p>
