@@ -49,11 +49,12 @@
                                 <br> <p>Posted by <b> <%= post.user %> </b> on <%=post.datePosted.getUTCDate()%>/<%=post.datePosted.getUTCMonth() + 1%>/<%=post.datePosted.getUTCFullYear()%></p>
                             </div>
                         </div>
+                        <% if (post.url.length > 0) { %>
+                            <div class="card-action">
+                                <a class="waves-effect waves-light btn" href="<%= post.url %>">Link</a>
+                            </div>
+                        <% } %> 
                     </div>
-                        <!-- <div class="card-action">
-                        <a href="#">This is a link</a>
-                        <a href="#">This is a link</a>
-                        </div> -->
                 </div>
             </div>
         </div>

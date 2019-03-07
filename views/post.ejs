@@ -43,15 +43,18 @@
                             </div>
                         </div>
                     </div>
+                    <div class="card-action">
                     <% if(typeof user != 'undefined' && user.username == post.user) { %>
-                        <div class="card-action">
                         <form class="deleteBtn" action="/post/delete" method="post">
                             <input type="hidden" name="queryName" id="name" value="<%= post.queryName %>">
                             <input class="waves-effect waves-light btn" type="submit" value="Delete">
                         </form>
                         <a class="waves-effect waves-light btn" href="/post/<%=post.queryName%>/edit">Edit</a>
-                        </div>
-                        <% } %> 
+                        <% } %>
+                        <% if (post.url.length > 0) { %>
+                        <a class="waves-effect waves-light btn" href="<%= post.url %>">Link</a>
+                        <% } %>  
+                    </div>
                 </div>
             </div>
         </div>
