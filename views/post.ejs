@@ -3,10 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Postin - <%= post.title %></title>
+    <title>Postin -
+        <%= post.title %>
+    </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%- include('./partials/resources'); -%>
 </head>
+
 <body>
     <%- include('./partials/header'); -%>
     <div class="container">
@@ -15,36 +18,44 @@
                 <div class="card #f5f5f5 grey lighten-4">
                     <div class="card-content">
                         <div class="row">
-                                <div class="col s2 m1">
-                                        <% if (typeof user == "undefined") { %>
-                                            <a class="center-align voteArrow" href="/post/<%=post.queryName%>/up/post"><i class="small material-icons">arrow_upward</i></a>
-                                            <h5 class="center-align"><%= post.score %></h5>
-                                            <a class="center-align voteArrow" href="/post/<%=post.queryName%>/down/post"><i class="small material-icons">arrow_downward</i></a>
-                                        <% }else if (user.postsUpVoted.includes(post.queryName)) { %>
-                                            <a class="center-align voteArrow curVoteArrow" href="/post/<%=post.queryName%>/up/post"><i class="small material-icons">arrow_upward</i></a>
-                                            <h5 class="center-align"><%= post.score %></h5>
-                                            <a class="center-align voteArrow" href="/post/<%=post.queryName%>/down/post"><i class="small material-icons">arrow_downward</i></a>
-                                        <% }else if(user.postsDownVoted.includes(post.queryName)){ %>
-                                            <a class="center-align voteArrow" href="/post/<%=post.queryName%>/up/post"><i class="small material-icons">arrow_upward</i></a>
-                                            <h5 class="center-align"><%= post.score %></h5>
-                                            <a class="center-align voteArrow curVoteArrow" href="/post/<%=post.queryName%>/down/post"><i class="small material-icons">arrow_downward</i></a>
-                                        <% }else{ %>
-                                            <a class="center-align voteArrow" href="/post/<%=post.queryName%>/up/post"><i class="small material-icons">arrow_upward</i></a>
-                                            <h5 class="center-align"><%= post.score %></h5>
-                                            <a class="center-align voteArrow" href="/post/<%=post.queryName%>/down/post"><i class="small material-icons">arrow_downward</i></a>
-                                        <%} %>   
-                                    </div>
+                            <div class="col s2 m1">
+                                <% if (typeof user == "undefined") { %>
+                                <a class="center-align voteArrow" href="/post/<%=post.queryName%>/up/post"><i class="small material-icons">arrow_upward</i></a>
+                                <h5 class="center-align">
+                                    <%= post.score %>
+                                </h5>
+                                <a class="center-align voteArrow" href="/post/<%=post.queryName%>/down/post"><i class="small material-icons">arrow_downward</i></a>
+                                <% }else{ %>
+                                <a class="center-align voteArrow <%- user.postsUpVoted.includes(post.queryName) ? "
+                                    curVoteArrow" : "" %>" href="/post/
+                                    <%=post.queryName%>/up/post"><i class="small material-icons">arrow_upward</i></a>
+                                <h5 class="center-align">
+                                    <%= post.score %>
+                                </h5>
+                                <a class="center-align voteArrow <%- user.postsDownVoted.includes(post.queryName) ? "
+                                    curVoteArrow" : "" %>" href="/post/
+                                    <%=post.queryName%>/down/post"><i class="small material-icons">arrow_downward</i></a>
+                                <% } %>
+                            </div>
                             <div class="col s10 m11">
                                 <span class="card-title">
                                     <%= post.title %>
                                 </span>
-                                <p><%= post.text %></p>
-                                <br> <p>Posted by <b><%= post.user %></b> on <%=post.datePosted.getUTCDate()%>/<%=post.datePosted.getUTCMonth() + 1%>/<%=post.datePosted.getUTCFullYear()%></p>
+                                <p>
+                                    <%= post.text %>
+                                </p>
+                                <br>
+                                <p>Posted by <b>
+                                        <%= post.user %></b> on
+                                    <%=post.datePosted.getUTCDate()%>/
+                                    <%=post.datePosted.getUTCMonth() + 1%>/
+                                    <%=post.datePosted.getUTCFullYear()%>
+                                </p>
                             </div>
                         </div>
                     </div>
                     <div class="card-action">
-                    <% if(typeof user != 'undefined' && user.username == post.user) { %>
+                        <% if(typeof user != 'undefined' && user.username == post.user) { %>
                         <form class="deleteBtn" action="/post/delete" method="post">
                             <input type="hidden" name="queryName" id="name" value="<%= post.queryName %>">
                             <input class="waves-effect waves-light btn" type="submit" value="Delete">
@@ -53,13 +64,11 @@
                         <% } %>
                         <% if (post.url.length > 0) { %>
                         <a class="waves-effect waves-light btn" href="<%= post.url %>">Link</a>
-                        <% } %>  
+                        <% } %>
                     </div>
                 </div>
             </div>
         </div>
-
-        
-</div>  
+    </div>
 </body>
 </html>
