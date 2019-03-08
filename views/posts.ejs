@@ -16,12 +16,12 @@
         <script>
             M.toast({
                 html: '<center> <%= message %> </center>'
-            })
+            });
         </script>
         <% } %>
 
         <ul>
-            <% for (let post of posts) {%>
+            <% for (let post of posts) { %>
             <div class="row post">
                 <div class="col s12 m12">
                     <div class="card #f5f5f5 grey lighten-4">
@@ -36,21 +36,15 @@
                                     <a class="center-align voteArrow" href="/post/<%=post.queryName%>/down/home"><i
                                             class="small material-icons">arrow_downward</i></a>
                                     <% }else{ %>
-                                    <a class="center-align voteArrow <%- user.postsUpVoted.includes(post.queryName) ? "
-                                        curVoteArrow" : "" %>" href="/post/
-                                        <%=post.queryName%>/up/home"><i class="small material-icons">arrow_upward</i></a>
+                                    <a class="center-align voteArrow <%- user.postsUpVoted.includes(post.queryName) ? "curVoteArrow" : "" %>" href="/post/<%=post.queryName%>/up/home"><i class="small material-icons">arrow_upward</i></a>
                                     <h5 class="center-align">
                                         <%= post.score %>
                                     </h5>
-                                    <a class="center-align voteArrow <%- user.postsDownVoted.includes(post.queryName) ? "
-                                        curVoteArrow" : "" %>" href="/post/
-                                        <%=post.queryName%>/down/home"><i class="small material-icons">arrow_downward</i></a>
+                                    <a class="center-align voteArrow <%- user.postsDownVoted.includes(post.queryName) ? "curVoteArrow" : "" %>" href="/post/<%=post.queryName%>/down/home"><i class="small material-icons">arrow_downward</i></a>
                                     <% } %>
-
                                 </div>
                                 <div class="col s10 m11">
                                     <span class="card-title">
-
                                         <a href="/post/<%=post.queryName%>">
                                             <%= post.title %></a>
                                     </span>
@@ -59,10 +53,7 @@
                                     </p>
                                     <br>
                                     <p>Posted by <b>
-                                            <%= post.user %> </b> on
-                                        <%=post.datePosted.getUTCDate()%>/
-                                        <%=post.datePosted.getUTCMonth() + 1%>/
-                                        <%=post.datePosted.getUTCFullYear()%>
+                                            <%= post.user %> </b> on <%=post.datePosted.getUTCDate()%>/<%=post.datePosted.getUTCMonth() + 1%>/<%=post.datePosted.getUTCFullYear()%>
                                     </p>
                                 </div>
                             </div>
