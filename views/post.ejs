@@ -84,6 +84,12 @@
                                 <i class="material-icons circle teal">comment</i>
                                 <%= comment.text %> <br>
                                 Comment by <b><%= comment.user %></b> on <%=post.datePosted.getUTCDate()%>/<%=post.datePosted.getUTCMonth() + 1%>/<%=post.datePosted.getUTCFullYear()%>
+                                <% if(typeof user != 'undefined' && user.username == comment.user) { %>
+                                    <form action="/comment/delete" method="post">
+                                        <input type="hidden" name="commentId" id="commentId" value="<%= comment.id %>">
+                                        <input type="submit" value="Delete">
+                                    </form>
+                                <% } %>
                             </li>
                             <%} %>
                         </ul>
