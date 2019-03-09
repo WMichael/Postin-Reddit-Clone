@@ -4,17 +4,12 @@
     right: 50%;
     transform: translateX(50%) translateY(50%);
   }
-
-/* Override button input text to change colour to white. */
-.waves-button-input {
-  color: white;
-}
-
-.post {
-  color: black;
-  margin-bottom: 1px;
-}
-
+  
+  .post {
+    color: black;
+    margin-bottom: 1px;
+  }
+  
 .postSingle {
   margin-top: 14px;
 }
@@ -33,5 +28,34 @@
 }
 
 .voteArrow:hover {
-  color: #212121;
+  color: #009688;
 }
+
+/* Override button input text to change colour to white. */
+.waves-button-input {
+  color: white;
+}
+
+/* Overriding CSS for Tabs  */
+.tabs .tab a{
+  color:#009688;
+} /*Text color*/
+
+.tabs .tab a:hover {
+  background-color: none;
+  color: #009688;
+} /*Text color on hover*/
+
+.tabs .tab a:focus, .tabs .tab a:focus.active {
+  background-color: #ffffff00;
+  outline: none;
+}
+
+.tabs .tab a.active {
+  background-color: none;
+  color: #009688;
+} /*Background and text color when a tab is active*/
+
+.tabs .indicator {
+  background-color:#4db6ac;
+} /*Color of underline*/

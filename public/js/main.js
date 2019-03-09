@@ -5,3 +5,8 @@ function editComment(id) {
     document.getElementById(id).setAttribute("style","display:none;");
     document.getElementById(id+"editForm").setAttribute("style","display:block;");
 }
+
+// Used for initialising Javascript components from Materalize Css.
+document.addEventListener("DOMContentLoaded", function(event) { 
+    M.AutoInit();
+  });

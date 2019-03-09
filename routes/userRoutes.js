@@ -1,4 +1,5 @@
 var Post = require('../model/post.js');
+var Comment = require('../model/comment.js');
 
 module.exports = (router,passport,isLoggedIn) => {
     require('../config/passport')(passport); // Passport for configuration
@@ -32,8 +33,9 @@ module.exports = (router,passport,isLoggedIn) => {
     // Protected, isLoggedIn is used to verify if user is logged in.
     router.get('/profile', isLoggedIn, (req, res, err) => {
         // Gets user out of session and passes to template.
-        Post.find({"user": req.user.username}, (err,result) => {res.render('profile', {posts: result, user : req.user, karma : getKarma(result)})});
-        console.log(req.user.username);
+        Comment.find({"user" : req.user.username}).populate("post_id").exec((err, comments) => {
+            Post.find({"user": req.user.username}, (err,posts) => {res.render('profile', {posts: posts, comments : comments, user : req.user, karma : getKarma(posts)})});
+        });
     });
 
     // Logout 
