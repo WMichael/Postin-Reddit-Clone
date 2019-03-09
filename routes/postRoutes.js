@@ -1,5 +1,6 @@
 var Post = require('../model/post.js');
 var User = require('../model/user.js');
+var Comment = require('../model/comment.js');
 
 module.exports = (router,passport,isLoggedIn,checkIfCanVote) => {
     //Implementation of voting
@@ -65,7 +66,10 @@ module.exports = (router,passport,isLoggedIn,checkIfCanVote) => {
 
     router.get('/post/:queryName', (req, res) => {
         Post.find({"queryName": req.params.queryName}, (err, result) => {
-            res.render('post',{post: result[0], user : req.user});
+            // Find comments with correct post_id and pass to render.
+            Comment.find({"post_id" : result[0].id}, (err, comments) => {
+                res.render('post',{post: result[0], user : req.user, comments : comments});
+            });
         });
     });
 
