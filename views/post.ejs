@@ -15,6 +15,8 @@
     <div class="container">
         <div class="row post postSingle">
             <div class="col s12 m12">
+
+                <!-- Post Section -->
                 <div class="card #f5f5f5 grey lighten-4">
                     <div class="card-content">
                         <div class="row">
@@ -43,9 +45,7 @@
                                 <br>
                                 <p>Posted by <b>
                                     <%= post.user %></b> on
-                                    <%=post.datePosted.getUTCDate()%>/
-                                    <%=post.datePosted.getUTCMonth() + 1%>/
-                                    <%=post.datePosted.getUTCFullYear()%>
+                                    <%=post.datePosted.getUTCDate()%>/<%=post.datePosted.getUTCMonth() + 1%>/<%=post.datePosted.getUTCFullYear()%>
                                 </p>
                             </div>
                         </div>
@@ -61,6 +61,32 @@
                         <% if (post.url.length > 0) { %>
                         <a class="waves-effect waves-light btn" href="<%= post.url %>">Link</a>
                         <% } %>
+                    </div>
+                </div>
+
+                <!-- Comment Section -->
+                <div class="card #f5f5f5 grey lighten-4">
+                    <div class="card-content">
+                        <% if(typeof user != 'undefined') {%>
+                        <form class="input-field" action="/comment/add" method="post">
+                            <input type="hidden" name="user" value="<%=user.username%>">
+                            <input type="hidden" name="post_id" value="<%=post.id%>">
+                            <input type="hidden" name="postQueryName" value="<%=post.queryName%>">
+                            <i class="material-icons prefix">mode_edit</i>
+                            <input id="comment_add" type="text" name="comment_text" required>
+                            <label for="comment_add">Add Comment</label>
+                        </form>
+                        <% } %>
+                        <span class="card-title">Comments: </span>
+                        <ul class="collection">
+                            <% for (let comment of comments) { %>
+                            <li class="collection-item avatar">
+                                <i class="material-icons circle teal">comment</i>
+                                <%= comment.text %> <br>
+                                Comment by <b><%= comment.user %></b> on <%=post.datePosted.getUTCDate()%>/<%=post.datePosted.getUTCMonth() + 1%>/<%=post.datePosted.getUTCFullYear()%>
+                            </li>
+                            <%} %>
+                        </ul>
                     </div>
                 </div>
             </div>

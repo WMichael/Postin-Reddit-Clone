@@ -17,6 +17,7 @@ router.use(flash()); // use connect-flash for flash messages stored in session
 
 require('./postRoutes')(router,passport,isLoggedIn,checkIfCanVote);
 require('./userRoutes')(router,passport,isLoggedIn);  
+require('./commentRoutes')(router);
 
 router.get('/', (req, res) => { res.redirect('/posts/')})
 
