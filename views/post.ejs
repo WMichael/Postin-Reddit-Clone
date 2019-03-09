@@ -80,17 +80,27 @@
                         <span class="card-title">Comments: </span>
                         <ul class="collection">
                             <% for (let comment of comments) { %>
-                            <li class="collection-item avatar">
+                            <li id="<%= comment._id%>" class="collection-item avatar">
                                 <i class="material-icons circle teal">comment</i>
-                                <%= comment.text %> <br>
+                                <%= comment.text %> 
+                                <br>
                                 Comment by <b><%= comment.user %></b> on <%=post.datePosted.getUTCDate()%>/<%=post.datePosted.getUTCMonth() + 1%>/<%=post.datePosted.getUTCFullYear()%>
+                                <br>
                                 <% if(typeof user != 'undefined' && user.username == comment.user) { %>
-                                    <form action="/comment/delete" method="post">
+                                    <form style="display:inline;" action="/comment/delete" method="post">
                                         <input type="hidden" name="commentId" id="commentId" value="<%= comment.id %>">
+                                        <input type="hidden" name="postQueryName" value="<%= post.queryName %>">
                                         <input type="submit" value="Delete">
                                     </form>
+                                    <button onclick="editComment('<%= comment._id %>')">Edit</button>
                                 <% } %>
                             </li>
+                            <form style="display:none;" id="<%= comment._id %>editForm" action="/comment/edit" method="post">
+                                <input type="hidden" name="commentId" value="<%=comment._id%>">
+                                <input type="hidden" name="postQueryName" value="<%= post.queryName %>">
+                                <input value="<%=comment.text%>" name="editedComment" type="text" class="validate">
+                                <label class="active" for="editedComment">Edit Comment</label>
+                            </form>
                             <%} %>
                         </ul>
                     </div>

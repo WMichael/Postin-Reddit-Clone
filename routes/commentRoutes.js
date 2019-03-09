@@ -1,6 +1,4 @@
 var Comment = require('../model/comment.js');
-var Post = require('../model/post.js');
-var User = require('../model/user.js');
 
 module.exports = (router) => {
     
@@ -25,8 +23,14 @@ module.exports = (router) => {
     router.post('/comment/delete', (req,res) => {
         console.log("Deleted");
         Comment.deleteOne({"_id": req.body.commentId}, () => {
-            console.log("Deleted");
-            res.redirect('/');
+            res.redirect('/post/' + req.body.postQueryName);
         });
+    });
+
+    // Edit Comment
+    router.post('/comment/edit', (req, res) => {               
+        Comment.updateOne({'_id': req.body.commentId},{
+            "text": req.body.editedComment
+        },() => res.redirect('/post/' + req.body.postQueryName));
     });
 }
