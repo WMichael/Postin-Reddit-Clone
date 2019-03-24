@@ -1,6 +1,7 @@
 var Post = require('../model/post.js');
 var User = require('../model/user.js');
 var Comment = require('../model/comment.js');
+var Channel = require('../model/channel.js');
 
 module.exports = (router,passport,isLoggedIn,checkIfCanVote) => {
     //Implementation of voting
@@ -61,11 +62,13 @@ module.exports = (router,passport,isLoggedIn,checkIfCanVote) => {
 
     // Post routes
     router.get('/', (req, res) => {
-        Post.find({}, (err,result) => {res.render('posts', {message: req.flash('message'), posts: result.sort((a,b) => {return b.score - a.score}), user : req.user})});
+        Post.find({}).populate("_channel").exec((err,result) => {res.render('posts', {
+            message: req.flash('message'), posts: result.sort((a,b) => {return b.score - a.score}), user : req.user, 
+        })});
     });
 
     router.get('/post/:queryName', (req, res) => {
-        Post.find({"queryName": req.params.queryName}, (err, result) => {
+        Post.find({"queryName": req.params.queryName}).populate("_channel").exec((err,result) => {
             // Find comments with correct post_id and pass to render.
             Comment.find({"post_id" : result[0].id}, (err, comments) => {
                 res.render('post',{post: result[0], user : req.user, comments : comments});
@@ -80,7 +83,9 @@ module.exports = (router,passport,isLoggedIn,checkIfCanVote) => {
     });
 
     router.get('/posts/new', isLoggedIn, (req, res) => {
-        res.render('newPost',{user : req.user});
+        Channel.find({}, (err, channels) => {
+            res.render('newPost',{user : req.user, channels : channels });
+        });
     });
 
     router.post('/posts/new', (req, res) => {
@@ -88,6 +93,7 @@ module.exports = (router,passport,isLoggedIn,checkIfCanVote) => {
         var post = new Post({
             "title": req.body.title,
             "queryName": queryName,
+            "_channel": req.body.channel_id,
             "url": req.body.url,
             "text": req.body.text,
             "user": req.body.user,

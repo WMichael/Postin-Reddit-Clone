@@ -13,6 +13,13 @@
         <h3>New Post</h3>
         <form action="/posts/new" method="post">
             <input type="text" id="title" name="title" placeholder="Title" required> <br>
+            <div class="input-field col s12">   
+                <select name="channel_id">
+                    <% for (let channel of channels) { %>
+                    <option value="<%=channel.id%>"><%=channel.name%></option>
+                    <% } %>
+                </select>  
+            </div>
             <input type="text" id="url" name="url" placeholder="Url"> <br>
             <div class="input-field">
                 <textarea type="text" class="materialize-textarea" id="text" name="text" placeholder="Text" required></textarea> <br>

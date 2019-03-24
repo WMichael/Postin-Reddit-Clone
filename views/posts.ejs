@@ -52,8 +52,11 @@
                                         <%= (post.text.length > 200) ? post.text.substring(0,199)+"..." : post.text%>
                                     </p>
                                     <br>
-                                    <p>Posted by <b>
-                                            <%= post.user %> </b> on <%=post.datePosted.getUTCDate()%>/<%=post.datePosted.getUTCMonth() + 1%>/<%=post.datePosted.getUTCFullYear()%>
+                                    <p>
+                                        <b><%= post._channel.name %></b>
+                                    </p>
+                                    <p>
+                                        Posted by <b> <%= post.user %> </b> on <%=post.datePosted.getUTCDate()%>/<%=post.datePosted.getUTCMonth() + 1%>/<%=post.datePosted.getUTCFullYear()%>
                                     </p>
                                 </div>
                             </div>
